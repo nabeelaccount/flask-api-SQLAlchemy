@@ -1,0 +1,5 @@
+# All requirement modules are installed via python3 -m pip -r requirements.txt
+
+flask               #   The web framework.
+psycopg2-binary     #   Connecting to the database
+Flask-SQLAlchemy    #   Run SQL queries using Python
