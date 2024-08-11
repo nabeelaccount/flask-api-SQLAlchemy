@@ -6,7 +6,7 @@ There are a number of ways of using and testing out this application.
 ## Running the application locally
 
 Prerequeists
-- You've created a file named .env with a key DATABASE_URL and the value as the database URL in the following format
+- You've created a file named .env with a key DATABASE_URL and the value as the database URL in the following format. Please make sure not to commit this file to GitHub or Docker.
 ```
 'postgresql://user:password@postgres-database-endpoint:5432/transactions'
 ```
@@ -49,6 +49,19 @@ curl --header "Content-Type: application/json" \
 ```
 
 You can also use Postman or Insomnia to run your POST request.
+
+
+## Creating a Docker container
+
+Once you've pushed the image:
+```
+docker build . -t your-account-name/fask-api-sqlalchemy
+```
+
+You can run the image inside a docker container as follows:
+```
+docker run -p 5000:5000 --env-file .env your-account-name/fask-api-sqlalchemy
+```
 
 
 Develop database driven REST API with Python: https://betterdatascience.com/develop-database-driven-rest-api-with-python-in-10-minutes/
