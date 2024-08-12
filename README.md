@@ -8,7 +8,7 @@ There are a number of ways of using and testing out this application.
 Prerequeists
 - You've created a file named .env with a key DATABASE_URL and the value as the database URL in the following format. Please make sure not to commit this file to GitHub or Docker.
 ```
-'postgresql://user:password@postgres-database-endpoint:5432/transactions'
+'DATABASE_URL=postgresql://user:password@postgres-database-endpoint:5432/transactions'
 ```
 This command assumes the Postgres has a database named transactions
 
