@@ -4,7 +4,7 @@ FROM python:3.12-slim
 # Set the working directory
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies - most frequent updated file(s)
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
@@ -18,5 +18,6 @@ EXPOSE 5000
 ENV FLASK_APP=app     
 ENV FLASK_DEBUG=False
 
-# Run the application
+# Run the application. By default uses IP: 127.0.0.1. Specify current host (0.0.0.0) and port
+#
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

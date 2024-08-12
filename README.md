@@ -52,7 +52,7 @@ curl --header "Content-Type: application/json" \
 You can also use Postman or Insomnia to run your POST request.
 
 
-## Running the application in a Docker Container
+## Running the application in a Docker container
 
 Once you've pushed the image:
 ```
@@ -67,4 +67,28 @@ docker run -p 5000:5000 --env-file .env your-account-name/fask-api-sqlalchemy
 
 Develop database driven REST API with Python: https://betterdatascience.com/develop-database-driven-rest-api-with-python-in-10-minutes/
 
+
+## Running the application in a Docker compose
+
+To start the application you should run:
+```
+docker compose up -flask_db
+```
+
+Check the database server is running locally using:
+```
+psql -h localhost -p 5432 -U postgres postgres
+```
+
+Then build the image by running:
+```
+docker compose build
+```
+
+Once this is complete and successful, it's now time to run the flask API application:
+```
+docker compose up flask_app
+```
+
+Excenllent example can be found here: https://github.com/FrancescoXX/flask-crud-live
 
