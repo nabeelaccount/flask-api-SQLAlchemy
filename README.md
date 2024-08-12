@@ -6,6 +6,7 @@ There are a number of ways of using and testing out this application.
 ## Running the application locally
 
 Prerequeists
+- You have a running Postgres Server with a database  "transactions".
 - You've created a file named .env with a key DATABASE_URL and the value as the database URL in the following format. Please make sure not to commit this file to GitHub or Docker.
 ```
 'DATABASE_URL=postgresql://user:password@postgres-database-endpoint:5432/transactions'
@@ -51,7 +52,7 @@ curl --header "Content-Type: application/json" \
 You can also use Postman or Insomnia to run your POST request.
 
 
-## Creating a Docker container
+## Running the application in a Docker Container
 
 Once you've pushed the image:
 ```
