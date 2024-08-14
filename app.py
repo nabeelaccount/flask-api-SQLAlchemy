@@ -19,8 +19,8 @@ class Transaction(db.Model):
     default= default value in case one is not provided
     """
     id = db.Column(db.Integer, primary_key=True)
-    transaction_id = db.Column(db.String(36), unique=True, nullable=False, default=str(uuid.uuid4()))
-    amount = db.Column(db.Numeric(10, 2), nullable=False)
+    transaction_id = db.Column(db.String, unique=True, nullable=False, default=str(uuid.uuid4()))
+    amount = db.Column(db.Numeric, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def json(self):
@@ -54,7 +54,7 @@ def create_transaction():
     db.session.add(transaction)
     db.session.commit()
 
-    return jsonify({"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created."}), 201
+    return {"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created at {timestamp}."}, 201
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

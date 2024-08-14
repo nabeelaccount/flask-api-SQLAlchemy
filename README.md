@@ -72,10 +72,10 @@ Develop database driven REST API with Python: https://betterdatascience.com/deve
 
 To start the application you should run:
 ```
-docker compose up -flask_db
+docker compose up -d flask_db
 ```
 
-Check the database server is running locally using:
+Check the database server is running locally. The password is postgres:
 ```
 psql -h localhost -p 5432 -U postgres postgres
 ```
