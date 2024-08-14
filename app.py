@@ -36,8 +36,8 @@ with app.app_context():
     db.create_all()
 
 
-# Creating the REST API
-@app.post("/api/transaction")
+# Post data
+@app.route("/api/transaction", methods=['POST'])
 def create_transaction():
     data = request.get_json()
 
@@ -54,7 +54,14 @@ def create_transaction():
     db.session.add(transaction)
     db.session.commit()
 
-    return {"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created at {timestamp}."}, 201
+    return jsonify({"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created at {timestamp}."}), 201
+
+@app.route("/api/all", methods=['POST'])
+def get_transaction():
+    data = request.get_json()
+
+    transactions = Transaction.query.all()
+    return jsonify([transaction.json() for transaction in transactions]), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
