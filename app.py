@@ -41,34 +41,39 @@ with app.app_context():
 # Post data
 @app.route("/api/transaction", methods=['POST'])
 def create_transaction():
-    # Takes incoming JSON
-    data = request.get_json()
+    try: 
+        # Takes incoming JSON
+        data = request.get_json()
 
-    # Generate a unique transaction_id if not provided
-    transaction_id = data.get("transactionId") or str(uuid.uuid4())
-    amount = data["amount"]
-    timestamp = data.get("timestamp") or datetime.utcnow().isoformat()
+        # Generate a unique transaction_id if not provided
+        transaction_id = data.get("transactionId") or str(uuid.uuid4())
+        amount = data["amount"]
+        timestamp = data.get("timestamp") or datetime.utcnow().isoformat()
 
-    # Convert timestamp to a datetime within Z
-    timestamp = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+        # Convert timestamp to a datetime within Z
+        timestamp = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
 
-    # Create a new Transaction object and adds and commits it to the database
-    transaction = Transaction(transaction_id=transaction_id, amount=amount, timestamp=timestamp)
-    db.session.add(transaction)
-    db.session.commit()
+        # Create a new Transaction object and adds and commits it to the database
+        transaction = Transaction(transaction_id=transaction_id, amount=amount, timestamp=timestamp)
+        db.session.add(transaction)
+        db.session.commit()
 
-    # Returns the following message in case of success
-    return jsonify({"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created at {timestamp}."}), 201
+        # Returns the following message in case of success
+        return jsonify({"id": transaction.id, "message": f"Transaction {transaction.transaction_id} created at {timestamp}."}), 201
+    except Exception as e:
+        return jsonify({'message': 'error creating transaction'}), 500
+
 
 # Getll all transaction objects
-@app.route("/api/all", methods=['POST'])
+@app.route("/api/all", methods=['GET'])
 def get_transaction():
-    data = request.get_json()
-
-    # Queries database for all the transactions table records from Transaction object
-    transactions = Transaction.query.all()
-    # Returns each transaction record in json formate
-    return jsonify([transaction.json() for transaction in transactions]), 200
+    try: 
+        # Queries database for all the transactions table records from Transaction object
+        transactions = Transaction.query.all()
+        # Returns each transaction record in json formate
+        return jsonify([transaction.json() for transaction in transactions]), 200
+    except Exception as e:
+        return jsonify({'message': 'error retriving transactions'}), 500
 
 if __name__ == '__main__':
     # Opens to all IP at port 5000
