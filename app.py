@@ -14,9 +14,7 @@ class Transaction(db.Model):
     __tablename__ = 'transactions'
 
     """
-    nullable= you must provide a value when entering a paramater
-    unique= must be unique across all other parameters
-    default= default value in case one is not provided
+    Create the transactions database table schema
     """
     # Auto increment id
     id = db.Column(db.Integer, primary_key=True)
