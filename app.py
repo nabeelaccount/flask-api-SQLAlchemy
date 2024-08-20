@@ -4,9 +4,11 @@ from os import environ
 from datetime import datetime
 import uuid
 
+# Initalise flask
 app = Flask(__name__)
 # Connect to the database using SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
+# Initalises SQLAlchemy
 db = SQLAlchemy(app)
 
 # Define the Transaction model
